@@ -1,4 +1,4 @@
-# @lintkit/locale
+# @kent7k/lintkit-locale
 
 Verify i18n JSON keys alignment across languages.
 

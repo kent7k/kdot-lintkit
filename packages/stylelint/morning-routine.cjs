@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['@lintkit/stylelint'],
+  extends: ['@kent7k/lintkit-stylelint'],
   rules: {
     'no-duplicate-selectors': null,
     // CSS Modules の camelCase とユーティリティの kebab-case を許可

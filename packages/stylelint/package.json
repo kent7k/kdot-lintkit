@@ -1,5 +1,5 @@
 {
-  "name": "@lintkit/stylelint",
+  "name": "@kent7k/lintkit-stylelint",
   "version": "0.1.3",
   "private": false,
   "license": "MIT",
@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lintkit/kdot-lintkit.git",
+    "url": "git+https://github.com/kent7k/kdot-lintkit.git",
     "directory": "packages/stylelint"
   },
   "publishConfig": {

@@ -1,5 +1,5 @@
 {
-  "name": "@lintkit/locale",
+  "name": "@kent7k/lintkit-locale",
   "version": "0.1.0",
   "private": false,
   "license": "MIT",
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lintkit/kdot-lintkit.git",
+    "url": "git+https://github.com/kent7k/kdot-lintkit.git",
     "directory": "packages/locale"
   },
   "publishConfig": {

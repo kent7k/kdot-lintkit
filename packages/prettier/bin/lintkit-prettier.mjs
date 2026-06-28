@@ -40,7 +40,7 @@ const DEBUG = process.env.LINTKIT_PRETTIER_DEBUG === '1'
 const centralCandidates = []
 try {
   // 依存解決で実体を特定（workspace symlink / node_modules どちらでもOK）
-  const pkgPath = req.resolve('@lintkit/prettier/package.json')
+  const pkgPath = req.resolve('@kent7k/lintkit-prettier/package.json')
   centralCandidates.push(path.join(path.dirname(pkgPath), 'ignore'))
 } catch {}
 centralCandidates.push(

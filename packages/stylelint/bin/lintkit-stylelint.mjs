@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Run stylelint with central config.
-// 1) try exports:  @lintkit/stylelint
+// 1) try exports:  @kent7k/lintkit-stylelint
 // 2) fallback:     ../index.cjs and ../ignore (relative to this bin)
 import { spawnSync } from 'node:child_process'
 import fs from 'node:fs'
@@ -27,10 +27,10 @@ function resolveCLI(pkgName, binName) {
 
 // 1) exports 経由で index.cjs / ignore を解決
 let cfg = null, ign = null
-try { cfg = req.resolve('@lintkit/stylelint') } catch {
+try { cfg = req.resolve('@kent7k/lintkit-stylelint') } catch {
     // noop
 }
-try { ign = req.resolve('@lintkit/stylelint/ignore') } catch {
+try { ign = req.resolve('@kent7k/lintkit-stylelint/ignore') } catch {
     // noop
 }
 

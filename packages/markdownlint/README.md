@@ -1,4 +1,4 @@
-# @lintkit/markdownlint
+# @kent7k/lintkit-markdownlint
 
 Wrapper around `markdownlint-cli` with a shared config.
 

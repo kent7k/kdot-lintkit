@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lintkit/kdot-lintkit.git"
+    "url": "git+https://github.com/kent7k/kdot-lintkit.git"
   },
   "scripts": {
     "publish:all": "pnpm -r publish --no-git-checks",
