@@ -1,0 +1,25 @@
+# --- build / vendor / caches ---
+node_modules/
+dist/
+out/
+.next/
+coverage/
+.turbo/
+.cache
+.parcel-cache
+
+# --- Storybook build outputs ---
+storybook-static/
+
+# --- Contentlayer generated ---
+.contentlayer/
+
+# --- Public assets (lint不要) ---
+public/
+
+# --- Strapi / build outputs ---
+cms/.strapi/
+cms/.strapi-updater.json
+cms/dist/
+
+apps/cms/public/monaco/**

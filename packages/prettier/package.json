@@ -1,0 +1,29 @@
+{
+  "name": "@lintkit/prettier",
+  "version": "0.2.0",
+  "private": false,
+  "license": "MIT",
+  "author": "kent7k",
+  "type": "module",
+  "description": "LintKit – shared Prettier config + ignore-merging wrapper",
+  "main": "index.json",
+  "bin": {
+    "lintkit-prettier": "bin/lintkit-prettier.mjs"
+  },
+  "files": [
+    "index.json",
+    "ignore",
+    "bin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lintkit/kdot-lintkit.git",
+    "directory": "packages/prettier"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "peerDependencies": {
+    "prettier": "^3.0.0"
+  }
+}

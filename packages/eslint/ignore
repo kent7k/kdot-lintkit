@@ -1,0 +1,48 @@
+# ====================================================================
+# ESLint-specific ignore
+#  - 解析対象に値しない生成ディレクトリ/ファイル、静的アセットを除外
+#  - 前段で packages/tooling-ignores/common.ignore がマージされます
+# ====================================================================
+
+# --- Build / caches / vendor（冗長だが ESLint 側にも明示） ---
+**/node_modules/**
+**/dist/**
+**/build/**
+**/out/**
+**/coverage/**
+**/.turbo/**
+**/.next/**
+**/storybook-static/**
+
+# --- Generated types / artifacts ---
+**/*.d.ts
+**/*.d.ts.map
+**/.contentlayer/**
+apps/**/.contentlayer/**
+**/next-env.d.ts
+**/payload-types.ts
+
+# --- Codegen / generated SDKs ---
+infra/sdks/supabase/**
+
+# --- Public assets（ソースではないため解析不要） ---
+apps/**/public/**
+apps/cms/public/monaco/**
+
+# --- MSW worker（解析不要） ---
+public/mockServiceWorker.js
+apps/**/public/mockServiceWorker.js
+
+# --- OpenAPI / Redoc generated（巨大/自動生成） ---
+openapi/openapi.json
+public/redoc.html
+public/swagger.html
+
+# --- Optional project dirs（Lint対象外にする場合） ---
+.storybook/**
+
+# --- Strapi app は対象外にしたい場合（任意） ---
+**/apps/cms-strapi/**
+
+# Payload-generated (do not lint)
+**/apps/cms/src/app/(payload)/**

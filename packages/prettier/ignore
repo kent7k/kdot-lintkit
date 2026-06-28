@@ -1,0 +1,50 @@
+# ====================================================================
+# Prettier-specific ignore
+#  - Prettierで整形不要・不適なものを確実にスキップ
+#  - 前段で packages/tooling-ignores/common.ignore がマージされます
+# ====================================================================
+
+# --- Package manager lockfiles (Prettier対象外にする。Gitではコミット推奨) ---
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# --- Build / Vendor / Caches (冗長だが明示的に重ねておく) ---
+node_modules/
+dist/
+build/
+out/
+coverage/
+.next/
+.turbo/
+.cache
+.parcel-cache
+.eslintcache
+.stylelintcache
+storybook-static/
+**/.contentlayer/**
+
+# --- Next.js generated declarations ---
+next-env.d.ts
+**/.next/**
+
+# --- typed-scss-modules declarations ---
+**/*.module.scss.d.ts
+
+# --- MSW generated ---
+public/mockServiceWorker.js
+apps/**/public/mockServiceWorker.js
+
+# --- CMS / SDK codegen（このリポジトリ固有） ---
+apps/**/payload-types.ts
+infra/sdks/supabase/**
+apps/cms/public/monaco/**
+
+# --- OpenAPI / Redoc generated ---
+openapi/openapi.json
+public/redoc.html
+public/swagger.html
+
+# --- Generic generated artifacts (保険として) ---
+**/*.d.ts
+**/*.d.ts.map

@@ -1,0 +1,31 @@
+{
+  "name": "@lintkit/markdownlint",
+  "version": "0.1.0",
+  "private": false,
+  "license": "MIT",
+  "author": "kent7k",
+  "type": "module",
+  "description": "LintKit – markdownlint wrapper with shared config",
+  "bin": {
+    "lintkit-markdownlint": "bin/lintkit-markdownlint.mjs"
+  },
+  "files": [
+    "bin",
+    "config",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lintkit/kdot-lintkit.git",
+    "directory": "packages/markdownlint"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "dependencies": {
+    "markdownlint-cli": "0.33.0"
+  }
+}

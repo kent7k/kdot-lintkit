@@ -1,0 +1,30 @@
+{
+  "name": "@lintkit/locale",
+  "version": "0.1.0",
+  "private": false,
+  "license": "MIT",
+  "author": "kent7k",
+  "type": "module",
+  "description": "LintKit – locale keys verifier (i18n JSON keys alignment checker)",
+  "bin": {
+    "lk-locale": "bin/lk-locale.mjs"
+  },
+  "files": [
+    "bin",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lintkit/kdot-lintkit.git",
+    "directory": "packages/locale"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "dependencies": {
+    "fast-glob": "3.3.3"
+  }
+}
