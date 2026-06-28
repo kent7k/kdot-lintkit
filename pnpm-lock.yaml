@@ -20,13 +20,13 @@ importers:
         specifier: 9.32.0
         version: 9.32.0
       '@next/eslint-plugin-next':
-        specifier: ^15.5.0
+        specifier: ^15.5.0 || ^16.0.0
         version: 15.5.19
       eslint:
-        specifier: 9.32.0
+        specifier: ^9.0.0
         version: 9.32.0
       eslint-config-next:
-        specifier: ^15.5.0
+        specifier: ^15.5.0 || ^16.0.0
         version: 15.5.19(eslint@9.32.0)(typescript@5.9.2)
       eslint-plugin-import:
         specifier: 2.32.0
@@ -47,7 +47,7 @@ importers:
         specifier: 16.3.0
         version: 16.3.0
       typescript:
-        specifier: '>=5.9.0 <6.0.0'
+        specifier: '>=5.9.0'
         version: 5.9.2
       typescript-eslint:
         specifier: ^8.40.0
@@ -74,7 +74,7 @@ importers:
   packages/stylelint:
     dependencies:
       stylelint:
-        specifier: 16.23.0
+        specifier: ^16.0.0
         version: 16.23.0(typescript@5.9.2)
       stylelint-config-recess-order:
         specifier: 4.0.0

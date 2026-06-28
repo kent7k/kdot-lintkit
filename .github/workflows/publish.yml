@@ -21,6 +21,7 @@ jobs:
           registry-url: https://npm.pkg.github.com
           scope: "@kent7k"
       - run: pnpm install --frozen-lockfile
-      - run: pnpm -r publish --no-git-checks
+      - run: pnpm check
+      - run: pnpm publish:all
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,6 +1,6 @@
 {
   "name": "@kent7k/lintkit-stylelint",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": false,
   "license": "MIT",
   "author": "kent7k",
@@ -33,6 +33,6 @@
     "stylelint-config-standard-scss": "15.0.1"
   },
   "peerDependencies": {
-    "stylelint": "16.23.0"
+    "stylelint": "^16.0.0"
   }
 }
