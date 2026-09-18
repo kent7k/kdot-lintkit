@@ -31,11 +31,24 @@ lint ツールの版を束ねて配るのが仕事なので、**依存が古く�
 手で追従すると必ず止まる（実際 2026-06-29 から 3 か月止まった）ため、Dependabot に任せている
 （`.github/dependabot.yml`）。
 
-- npm は root と `packages/*` の両方を対象。minor/patch はまとめて 1 PR、**メジャーは 1 件ずつ**
+- npm は **root のみ**を対象（pnpm workspace なので `/` で `packages/*` も含まれる。
+  `packages/*` を個別ディレクトリとして足すと root の `pnpm-lock.yaml` が据え置かれ、
+  CI の `--frozen-lockfile` が必ず落ちる）。minor/patch はまとめて 1 PR、**メジャーは 1 件ずつ**
 - github-actions は monthly
-- PR は `ci.yml` の `pnpm check`（全パッケージの config をロードして落ちないか検査）で自動検証される
+- PR は `ci.yml` の `pnpm check` で自動検証される
 
-**基本は緑の PR をマージするだけ。** メジャー更新の PR 履歴が、このリポジトリを維持するコストの実測値になる。
+### `pnpm check` が見ているもの
+
+1. 各パッケージの config を import / require して落ちないか
+2. **`scripts/fixtures/` の実ファイルを ESLint に実際に通して 0 件か**
+
+2 は 1 では検出できない parser の設定ミスを捕まえるためにある。
+実際 `projectService` と `project` の併用で全ファイルが parsing error になり、
+消費側の lint が丸ごと無効化されていたことがあった（1 は素通りしていた）。
+fixture は typed-zones の glob (`apps/**/{app,src}/**`) に合う位置に置くこと。
+
+**基本は緑の PR をマージするだけ。** ただし**メジャーは緑でも消費側で実際に lint を回して確認する**
+（`pnpm check` は fixture 1 枚しか見ていない）。メジャー更新の PR 履歴が、このリポジトリを維持するコストの実測値になる。
 見合わなくなったら Biome への一本化を検討する（その時に捨てられないのは上記 2 つだけ）。
 
 ## セットアップ
