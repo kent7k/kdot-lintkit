@@ -54,6 +54,32 @@ try {
   fail('markdownlint/config/base.json', e)
 }
 
+// ESLint smoke run — the config-load checks above only prove the config *imports*.
+// They cannot see a parser misconfiguration, which silently turns every file into a
+// parsing error and disables linting entirely in consumers. So actually lint a fixture.
+try {
+  const { ESLint } = await import('eslint')
+  const fixtureRoot = path.join(root, 'scripts/fixtures')
+  const cwd = process.cwd()
+  process.chdir(fixtureRoot) // configs read process.cwd() for tsconfigRootDir
+  try {
+    const mod = await import(path.join(root, 'packages/eslint/next.mjs'))
+    const def = mod.default
+    const baseConfig = typeof def === 'function' ? def() : def
+    const eslint = new ESLint({ overrideConfigFile: true, baseConfig, cwd: fixtureRoot })
+    const results = await eslint.lintFiles(['apps/demo/src/sample.tsx'])
+    const msgs = results.flatMap((r) => r.messages)
+    if (msgs.length) {
+      throw new Error(msgs.map((m) => `${m.ruleId ?? 'parse'}: ${m.message}`).join(' | '))
+    }
+    ok('eslint/next smoke lint (fixture)')
+  } finally {
+    process.chdir(cwd)
+  }
+} catch (e) {
+  fail('eslint/next smoke lint (fixture)', e)
+}
+
 const passed = checks.filter(Boolean).length
 console.log(`\n${passed}/${checks.length} checks passed`)
 process.exit(passed === checks.length ? 0 : 1)

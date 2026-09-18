@@ -179,13 +179,20 @@ export default function createNextConfig({
       files: fromEnvJSON('LINTKIT_TYPED_ZONE_GLOBS_JSON', DEFAULT_TYPED_ZONE_FILES),
       languageOptions: {
         parser: tseslint.parser,
+        // projectService と project は排他。両方渡すと typescript-eslint が
+        // 「Enabling "project" does nothing when "projectService" is enabled」で
+        // 全ファイルを parsing error にする（＝ lint が丸ごと無効化される）。
+        // 既定は projectService（モノレポの tsconfig も自動で辿る）。
+        // 自動解決で取りこぼす場合だけ LINTKIT_TYPED_PROJECTS_JSON で
+        // 明示 project モードに切り替える。
         parserOptions: {
-        projectService: true,          // まずは TS の Project Service に任せる
-        // モノレポでの取りこぼし防止に、参照する tsconfig を明示
-        project: fromEnvJSON('LINTKIT_TYPED_PROJECTS_JSON', DEFAULT_TS_PROJECT_GLOBS),
-        tsconfigRootDir: process.cwd(),
-        // それでも見つからない場合のフェイルセーフ（エラーを起こさず "default project" を使用）
-        allowDefaultProject: true,
+          ...(process.env.LINTKIT_TYPED_PROJECTS_JSON
+            ? {
+                projectService: false,
+                project: fromEnvJSON('LINTKIT_TYPED_PROJECTS_JSON', DEFAULT_TS_PROJECT_GLOBS),
+              }
+            : { projectService: true }),
+          tsconfigRootDir: process.cwd(),
         },
         ecmaVersion: 'latest',
         sourceType: 'module',
