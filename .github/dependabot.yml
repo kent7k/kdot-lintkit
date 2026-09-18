@@ -1,0 +1,54 @@
+# Dependabot version updates
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+#
+# lintkit は「lint ツールの版を束ねて配る」のが仕事なので、依存が古くなること自体が
+# パッケージの劣化になる。手で追従すると必ず止まるため自動化する。
+# 追従コストを PR 履歴で可視化する狙いもある (eslint 10 移行時の判断材料)。
+
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    # root + packages/* (eslint, locale, markdownlint, prettier, stylelint)
+    directories:
+      - "/"
+      - "/packages/*"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    groups:
+      # メジャーは 1 件ずつ見たいので minor/patch だけまとめる
+      lint-tooling:
+        patterns:
+          - "eslint*"
+          - "@eslint/*"
+          - "typescript-eslint"
+          - "eslint-plugin-*"
+          - "eslint-config-*"
+          - "@next/eslint-plugin-next"
+          - "prettier"
+          - "stylelint*"
+          - "markdownlint*"
+        update-types:
+          - "minor"
+          - "patch"
+      misc:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "eslint*"
+          - "@eslint/*"
+          - "typescript-eslint"
+          - "eslint-plugin-*"
+          - "eslint-config-*"
+          - "@next/eslint-plugin-next"
+          - "prettier"
+          - "stylelint*"
+          - "markdownlint*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: monthly

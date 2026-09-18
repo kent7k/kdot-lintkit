@@ -12,7 +12,7 @@
 |---|---|---|
 | `@kent7k/lintkit-eslint` | ESLint flat config | `./base` `./node` `./next` `./flat` を export。consumer の node_modules を優先解決 |
 | `@kent7k/lintkit-prettier` | Prettier config + ignore マージ wrapper | `index.json` が config。`lintkit-prettier` で共通 ignore を結合して実行 |
-| `@kent7k/lintkit-stylelint` | Stylelint config | `standard-scss` + `recess-order`。`.` と `./morning-routine` を export |
+| `@kent7k/lintkit-stylelint` | Stylelint config | `standard-scss` + `recess-order` |
 | `@kent7k/lintkit-markdownlint` | markdownlint wrapper | `config/base.json` 同梱。`markdownlint-cli` をバンドル |
 | `@kent7k/lintkit-locale` | i18n JSON キー整合チェッカ | `lk-locale` CLI。`fast-glob` 利用 |
 

@@ -1,6 +1,6 @@
 {
   "name": "@kent7k/lintkit-stylelint",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "private": false,
   "license": "MIT",
   "author": "kent7k",
@@ -12,13 +12,11 @@
   },
   "files": [
     "index.cjs",
-    "morning-routine.cjs",
     "ignore",
     "bin"
   ],
   "exports": {
-    ".": "./index.cjs",
-    "./morning-routine": "./morning-routine.cjs"
+    ".": "./index.cjs"
   },
   "repository": {
     "type": "git",

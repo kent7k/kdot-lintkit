@@ -36,7 +36,7 @@ try {
 }
 
 // Stylelint configs — requireable CommonJS objects.
-for (const f of ['index.cjs', 'morning-routine.cjs']) {
+for (const f of ['index.cjs']) {
   try {
     const c = require(path.join(root, 'packages/stylelint', f))
     if (!c || typeof c !== 'object') throw new Error('empty config')
