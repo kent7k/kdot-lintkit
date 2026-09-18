@@ -101,6 +101,10 @@ export const BASE_STYLE_RULES = {
   'no-extra-semi': 'error',
   'no-unexpected-multiline': 'error',
   'no-unreachable': 'error',
+
+  // 日本語 UI では JSX テキスト中の全角スペースが意図的なレイアウトになる
+  // (例: <span>　次回更新 {period}</span>)。コード部分の紛れ込みは引き続き弾く。
+  'no-irregular-whitespace': ['error', { skipJSXText: true }],
 }
 export const TS_CORE_RULES = {
   'no-undef': 'off',
