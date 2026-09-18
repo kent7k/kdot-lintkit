@@ -26,6 +26,6 @@
     "registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
-    "markdownlint-cli": "0.33.0"
+    "markdownlint-cli": "0.49.1"
   }
 }
