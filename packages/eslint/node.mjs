@@ -69,7 +69,9 @@ export default function createNodeTSConfig({
             devDependencies: [
               '**/*.{spec,test}.{ts,tsx,js,jsx}',
               '**/*.config.{js,ts}',
-              '**/scripts/*.{js,ts}',
+              '**/scripts/**/*.{js,ts,mjs}',
+              // 手で叩く開発用スクリプト (dev-send-mail.ts 等)
+              '**/dev-*.{ts,tsx,mjs,js}',
             ],
             peerDependencies: false,
           },

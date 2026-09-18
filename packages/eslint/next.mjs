@@ -126,6 +126,9 @@ export default function createNextConfig({
               '**/__fixtures__/**/*.{ts,tsx}',
               '**/mocks/**/*.{ts,tsx,js,jsx}',
               'tests/**/*',
+              // 手で叩く開発用スクリプト (dev-send-mail.ts 等) と scripts/ 配下
+              '**/dev-*.{ts,tsx,mjs,js}',
+              '**/scripts/**/*.{ts,tsx,mjs,js}',
               '**/testUtils.{ts,tsx,js,jsx}',
             ],
             // ★ ライブラリ（ui-core）向けに peerDeps を正として扱う
