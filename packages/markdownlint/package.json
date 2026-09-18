@@ -1,6 +1,6 @@
 {
   "name": "@kent7k/lintkit-markdownlint",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": false,
   "license": "MIT",
   "author": "kent7k",
@@ -26,6 +26,6 @@
     "registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
-    "markdownlint-cli": "0.33.0"
+    "markdownlint-cli": "0.49.1"
   }
 }
