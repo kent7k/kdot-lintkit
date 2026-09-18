@@ -8,10 +8,10 @@
 version: 2
 updates:
   - package-ecosystem: "npm"
-    # root + packages/* (eslint, locale, markdownlint, prettier, stylelint)
-    directories:
-      - "/"
-      - "/packages/*"
+    # "/" だけで pnpm workspace 全体 (packages/*) が対象になる。
+    # packages/* を個別ディレクトリとして足すと、その package.json だけが更新されて
+    # root の pnpm-lock.yaml が据え置かれ、CI の --frozen-lockfile が必ず落ちる。
+    directory: "/"
     schedule:
       interval: weekly
     open-pull-requests-limit: 10
