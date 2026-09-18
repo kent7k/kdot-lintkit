@@ -1,0 +1,8 @@
+// Smoke fixture: intentionally clean SCSS. check.mjs fails if Stylelint reports
+// anything on it, which catches invalid rule names in the config (Stylelint
+// surfaces those as per-file "Unknown rule" errors, not as a load-time throw).
+.sampleBlock {
+  display: flex;
+  margin: 0;
+  color: #333;
+}

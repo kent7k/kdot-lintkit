@@ -80,6 +80,30 @@ try {
   fail('eslint/next smoke lint (fixture)', e)
 }
 
+// Stylelint smoke run — requiring the config does not validate rule names.
+// An invalid rule (e.g. a wrong "scss/" prefix) only surfaces as an "Unknown rule"
+// error per linted file, so actually lint a fixture.
+try {
+  const stylelint = (await import('stylelint')).default
+  const config = require(path.join(root, 'packages/stylelint/index.cjs'))
+  const res = await stylelint.lint({
+    files: path.join(root, 'scripts/fixtures/styles/sample.scss'),
+    config,
+    customSyntax: require.resolve('postcss-scss'),
+    configBasedir: path.join(root, 'packages/stylelint'),
+  })
+  const warnings = res.results.flatMap((r) => r.warnings)
+  const invalid = res.results.flatMap((r) => r.invalidOptionWarnings ?? [])
+  if (warnings.length || invalid.length) {
+    throw new Error(
+      [...invalid.map((w) => w.text), ...warnings.map((w) => `${w.rule}: ${w.text}`)].join(' | '),
+    )
+  }
+  ok('stylelint/index.cjs smoke lint (fixture)')
+} catch (e) {
+  fail('stylelint/index.cjs smoke lint (fixture)', e)
+}
+
 const passed = checks.filter(Boolean).length
 console.log(`\n${passed}/${checks.length} checks passed`)
 process.exit(passed === checks.length ? 0 : 1)

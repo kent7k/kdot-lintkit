@@ -15,7 +15,6 @@ module.exports = {
 
    // @mixin の中の & は、include された先で正しい scoping root を持つ。
    // このルールは mixin の外側を見られないので一律に誤検出する。
-   'scss/nesting-selector-no-missing-scoping-root': null,
    'nesting-selector-no-missing-scoping-root': null,
 
    /**
