@@ -48,7 +48,11 @@ if (globs.length === 0) {
   globs.push(
     'src/locales/*.json',
     'apps/*/src/locales/*.json',
-    'packages/*/src/locales/*.json'
+    'packages/*/src/locales/*.json',
+    // Next.js では public/ 配下に置く構成もある (消費側 2 リポジトリはこちら)
+    'public/locales/*.json',
+    'apps/*/public/locales/*.json',
+    'packages/*/public/locales/*.json'
   )
 }
 
