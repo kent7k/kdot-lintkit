@@ -1,6 +1,6 @@
 {
   "name": "@kent7k/lintkit-stylelint",
-  "version": "0.2.2",
+  "version": "1.0.0",
   "private": false,
   "license": "MIT",
   "author": "kent7k",
@@ -24,7 +24,8 @@
     "directory": "packages/stylelint"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
     "stylelint-config-recess-order": "7.8.0",

@@ -7,7 +7,8 @@
 他の構成への一般化や外部プロジェクトへの配布は目標にしない（そのつもりで作った姉妹リポジトリの
 `kdot-devkit` は、汎用性を気にして手が止まり、利用者ゼロのまま 2026-09-18 に廃止した）。
 
-pnpm monorepo で各ツールを独立パッケージとして持ち、GitHub Packages (`npm.pkg.github.com`) に private publish する。
+pnpm monorepo で各ツールを独立パッケージとして持ち、npmjs (`registry.npmjs.org`) に public で publish する（2026-10 に GitHub Packages の private から移した。読む側の鍵を無くすため。経緯は kdot-hq `docs/packages-registry-plan-2026-10.md`）。
+public なのは鍵を要らなくするためで、他人向けに保守する約束ではない。保証範囲は上の 2 つだけ。
 
 > 姉妹リポジトリ: [`kdot-tsconfig`](https://github.com/kent7k/kdot-tsconfig) (`@kent7k/tsconfig`)。
 > tsconfig は依存ゼロなので 1 パッケージ多 exports。lintkit は各ツールの依存が重く異なるため、依存を分離できる monorepo にしている。
@@ -59,17 +60,9 @@ pnpm install
 
 ## 取得方法（各プロジェクト側）
 
-公開しないので **GitHub Packages 経由**で取得する。consumer 側の `.npmrc` には **scope routing だけ**を書く:
+npmjs の public パッケージなので、consumer 側の `.npmrc` に routing も auth も要らない。
 
-```ini
-@kent7k:registry=https://npm.pkg.github.com
-```
-
-認証情報はここに書かない（pnpm >= 10.34 はプロジェクト層の `${ENV}` 展開 auth を捨てる）。
-`read:packages` 権限の PAT は `~/.npmrc` か `NODE_AUTH_TOKEN` で渡す。
-正本は `~/.dotfiles/.config/lang/npm/README.md`。
-
-その上で普通にインストール:
+普通にインストール:
 
 ```bash
 pnpm add -D @kent7k/lintkit-eslint @kent7k/lintkit-prettier @kent7k/lintkit-stylelint @kent7k/lintkit-markdownlint @kent7k/lintkit-locale
@@ -96,13 +89,15 @@ module.exports = require('@kent7k/lintkit-stylelint')
 
 ## publish
 
+タグ `v*` の push で `.github/workflows/publish.yml` が npmjs へ出す。**token は持たない**（npmjs の trusted publishing＝GitHub Actions の OIDC）。
+`scripts/publish.mjs` は登録済の `name@version` を飛ばすので、上げたパッケージだけが出る。
+
 ```bash
-# 認証: write:packages 権限の PAT を ~/.npmrc か NODE_AUTH_TOKEN に
-pnpm publish:all          # 全パッケージを GitHub Packages へ
+# packages/<x>/package.json の version を上げて commit したあと
+git tag v$(date +%Y%m%d)-1 && git push origin --tags
 ```
 
-バージョンは各 `packages/*/package.json` の `version` を上げてから publish する。
-CI からの自動 publish は `.github/workflows/publish.yml`（タグ push でトリガ）。
+- 新しいパッケージを足したときだけ、npmjs のそのパッケージの Settings → Trusted publisher に `kent7k/kdot-lintkit`・`publish.yml` を登録する（npmjs は存在しないパッケージに登録できないので、初回 1 回だけ手元から token で出す）。
+- 手元から出すときも `npm login` は使わない（`~/.npmrc` は dotfiles への symlink で、token のリテラルが git に入る）。
 
-**publish したら消費側 2 リポジトリの依存レンジも上げること。** `0.x` では minor bump が
-レンジ (`^0.1.x`) を跨ぐため、上げ忘れると以降の修正が一切届かなくなる。
+1.0.0 からは semver どおり。minor・patch は consumer の `^1` に Dependabot が届ける。**メジャーを上げたときだけ**消費側 2 リポジトリのレンジを手で上げる。
