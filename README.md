@@ -97,7 +97,7 @@ module.exports = require('@kent7k/lintkit-stylelint')
 git tag v$(date +%Y%m%d)-1 && git push origin --tags
 ```
 
-- 新しいパッケージを足したときだけ、npmjs のそのパッケージの Settings → Trusted publisher に `kent7k/kdot-lintkit`・`publish.yml` を登録する（npmjs は存在しないパッケージに登録できないので、初回 1 回だけ手元から token で出す）。
+- 新しいパッケージを足したときだけ、初回 1 回を手元から出す（`NPM_TOKEN="$(pbpaste)" bash scripts/first-publish.sh packages/<x>`・token はファイルに残らない）。そのあと npmjs のそのパッケージの Settings → Trusted publisher に `kent7k/kdot-lintkit`・`publish.yml` を登録する。
 - 手元から出すときも `npm login` は使わない（`~/.npmrc` は dotfiles への symlink で、token のリテラルが git に入る）。
 
 1.0.0 からは semver どおり。minor・patch は consumer の `^1` に Dependabot が届ける。**メジャーを上げたときだけ**消費側 2 リポジトリのレンジを手で上げる。
