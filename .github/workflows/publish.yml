@@ -1,5 +1,8 @@
 name: publish
 
+# npmjs へ trusted publishing（OIDC）で出す。token は持たない。
+# 前提: npmjs の各パッケージの Settings → Trusted publisher に
+#   repository = kent7k/kdot-lintkit・workflow = publish.yml を登録済（初回 publish だけ手元から token で出す）。
 on:
   push:
     tags:
@@ -11,17 +14,16 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write
+      id-token: write
     steps:
       - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v7
         with:
-          node-version: 22
-          registry-url: https://npm.pkg.github.com
-          scope: "@kent7k"
+          # trusted publishing は Node >= 22.14・npm >= 11.5.1。Node 24 は npm 11 を同梱する。
+          # registry-url は渡さない（渡すと NODE_AUTH_TOKEN 前提の .npmrc が書かれる）。
+          node-version: 24
+      - run: npm --version
       - run: pnpm install --frozen-lockfile
       - run: pnpm check
       - run: pnpm publish:all
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

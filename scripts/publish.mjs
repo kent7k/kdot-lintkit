@@ -9,7 +9,7 @@ import { readFileSync, readdirSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-const REGISTRY = 'https://npm.pkg.github.com'
+const REGISTRY = 'https://registry.npmjs.org/'
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const pkgsDir = path.join(root, 'packages')
 
@@ -42,7 +42,9 @@ for (const dir of readdirSync(pkgsDir)) {
   }
 
   console.log(`publish ${spec}`)
-  execFileSync('pnpm', ['publish', '--no-git-checks'], { cwd: pkgDir, stdio: 'inherit' })
+  // npm CLI で出す: npmjs の trusted publishing（OIDC）は npm >= 11.5.1 だけが対応し、pnpm publish は token を要る。
+  // workspace: 依存は無いので pnpm の書き換えは要らない。
+  execFileSync('npm', ['publish', '--access', 'public', `--registry=${REGISTRY}`], { cwd: pkgDir, stdio: 'inherit' })
   published++
 }
 

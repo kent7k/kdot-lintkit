@@ -1,6 +1,6 @@
 {
   "name": "@kent7k/lintkit-prettier",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "private": false,
   "license": "MIT",
   "author": "kent7k",
@@ -21,7 +21,8 @@
     "directory": "packages/prettier"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "peerDependencies": {
     "prettier": "^3.0.0"
